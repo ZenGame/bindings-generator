@@ -690,6 +690,7 @@ class NativeClass(object):
     def _deep_iterate(self, cursor=None, depth=0):
         for node in cursor.get_children():
             # print("%s%s - %s" % ("> " * depth, node.displayname, node.kind))
+           
             if self._process_node(node):
                 self._deep_iterate(node, depth + 1)
 
@@ -1243,7 +1244,11 @@ def main():
             sections = []
             sections.append(opts.section)
         else:
-            raise Exception("Section not found in config file")
+            print "sections begin---"
+            for s in config.sections():
+                print(s)
+            print "sections end---"
+            raise Exception("Section not found in config file "+opts.section)
     else:
         print("processing all sections")
         sections = config.sections()
